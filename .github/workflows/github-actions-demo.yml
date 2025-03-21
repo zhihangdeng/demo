@@ -20,4 +20,5 @@ jobs:
         run: |
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
+          echo $PLATFORM_PAIR
           echo $GITHUB_ENV
