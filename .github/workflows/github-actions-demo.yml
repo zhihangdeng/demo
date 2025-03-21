@@ -80,4 +80,4 @@ jobs:
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
         run: |
-          ls
+          echo $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
