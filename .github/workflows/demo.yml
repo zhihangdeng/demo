@@ -16,12 +16,14 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
+          registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Login to Quay Hub
         uses: docker/login-action@v3
         with:
+          registry: quay.io
           username: ${{ secrets.QUAYHUB_USERNAME }}
           password: ${{ secrets.QUAYHUB_TOKEN }}
 
