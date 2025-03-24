@@ -1,0 +1,43 @@
+name: ci
+
+env: 
+  REGISTRY_IMAGE_TAG: zhihang161013/app:latest
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to Quay Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.QUAYHUB_USERNAME }}
+          password: ${{ secrets.QUAYHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v6
+        with: 
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            docker.io/env.${{ REGISTRY_IMAGE_TAG }}
+            quay.io/env.${{ REGISTRY_IMAGE_TAG }}
+          file: ${{ github.workspace }}/Dockerfile
+          context: ${{ github.workspace }}
