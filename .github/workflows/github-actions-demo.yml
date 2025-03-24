@@ -109,7 +109,7 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           ls
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+          docker buildx imagetools create docker.io/${{ env.REGISTRY_IMAGE }}:1.0-oe2403lts \
             $(printf 'docker.io/${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+          docker buildx imagetools create quay.io/${{ env.REGISTRY_IMAGE }}:1.0-oe2403lts \
             $(printf 'quay.io/${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
