@@ -1,7 +1,7 @@
 name: ci
 
 env: 
-  REGISTRY_IMAGE_TAG: "zhihang161013/app:latest"
+  REGISTRY_IMAGE_TAG: zhihang161013/app:latest
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            docker.io/env.${{ REGISTRY_IMAGE_TAG }}
-            quay.io/env.${{ REGISTRY_IMAGE_TAG }}
+            docker.io/${{ env.REGISTRY_IMAGE_TAG }}
+            quay.io/${{ env.REGISTRY_IMAGE_TAG }}
           file: ${{ github.workspace }}/Dockerfile
           context: ${{ github.workspace }}
