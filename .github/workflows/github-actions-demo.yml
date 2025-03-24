@@ -108,5 +108,8 @@ jobs:
       - name: Create manifest list and pushdd
         working-directory: ${{ runner.temp }}/digests
         run: |
+          ls
           docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
+            $(printf 'docker.io/${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
+          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+            $(printf 'quay.io/${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
