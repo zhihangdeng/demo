@@ -1,7 +1,7 @@
 name: ci
 
 env: 
-  REGISTRY_IMAGE_TAG: zhihang161013/app:latest
+  REGISTRY_IMAGE_TAG: "zhihang161013/app:latest"
 
 on:
   push:
