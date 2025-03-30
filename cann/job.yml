@@ -32,8 +32,6 @@
             
             x86_64
             
-            aarch64
-            
           tags: |
             
             docker.io/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts

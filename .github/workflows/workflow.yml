@@ -33,8 +33,6 @@ jobs:
             
             x86_64
             
-            aarch64
-            
           tags: |
             
             docker.io/openeuler/openeuler:24.03-lts
@@ -74,8 +72,6 @@ jobs:
           platforms: |
             
             x86_64
-            
-            aarch64
             
           tags: |
             
@@ -117,8 +113,6 @@ jobs:
             
             x86_64
             
-            aarch64
-            
           tags: |
             
             docker.io/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts
@@ -158,8 +152,6 @@ jobs:
           platforms: |
             
             x86_64
-            
-            aarch64
             
           tags: |
             
