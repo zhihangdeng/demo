@@ -19,22 +19,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
-        
-      - name: Login to Quay.io
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-        
-      
-        
-      - name: Login to OEPKGS
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.OEPKGS_USERNAME }}
-          password: ${{ secrets.OEPKGS_TOKEN }}
-        
-      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -54,10 +38,6 @@ jobs:
           tags: |
             
             docker.io/openeuler/openeuler:24.03-lts
-            
-            quay.io/openeuler/openeuler:24.03-lts
-            
-            hub.oepkgs.net/openeuler/openeuler:24.03-lts
             
           file: ${{ github.workspace }}/openeuler/Dockerfile
           context: ${{ github.workspace }}/openeuler
@@ -81,22 +61,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
-        
-      - name: Login to Quay.io
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-        
-      
-        
-      - name: Login to OEPKGS
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.OEPKGS_USERNAME }}
-          password: ${{ secrets.OEPKGS_TOKEN }}
-        
-      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -116,10 +80,6 @@ jobs:
           tags: |
             
             docker.io/openeuler/python:3.9-oe2403lts
-            
-            quay.io/openeuler/python:3.9-oe2403lts
-            
-            hub.oepkgs.net/openeuler/python:3.9-oe2403lts
             
           file: ${{ github.workspace }}/python/Dockerfile
           context: ${{ github.workspace }}/python
@@ -143,22 +103,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
-        
-      - name: Login to Quay.io
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-        
-      
-        
-      - name: Login to OEPKGS
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.OEPKGS_USERNAME }}
-          password: ${{ secrets.OEPKGS_TOKEN }}
-        
-      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -178,10 +122,6 @@ jobs:
           tags: |
             
             docker.io/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts
-            
-            quay.io/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts
-            
-            hub.oepkgs.net/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts
             
           file: ${{ github.workspace }}/cann/Dockerfile
           context: ${{ github.workspace }}/cann
@@ -205,22 +145,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
-        
-      - name: Login to Quay.io
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-        
-      
-        
-      - name: Login to OEPKGS
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.OEPKGS_USERNAME }}
-          password: ${{ secrets.OEPKGS_TOKEN }}
-        
-      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -240,10 +164,6 @@ jobs:
           tags: |
             
             docker.io/openeuler/pytorch:2.5.1-cann8.0.0.beta1-python3.9-oe2403lts
-            
-            quay.io/openeuler/pytorch:2.5.1-cann8.0.0.beta1-python3.9-oe2403lts
-            
-            hub.oepkgs.net/openeuler/pytorch:2.5.1-cann8.0.0.beta1-python3.9-oe2403lts
             
           file: ${{ github.workspace }}/pytorch/Dockerfile
           context: ${{ github.workspace }}/pytorch
