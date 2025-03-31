@@ -1,3 +1,5 @@
+ARG BASE={{ base }}
+
 FROM openeuler/openeuler:24.03-lts as builder
 
 ARG TARGETARCH
@@ -12,9 +14,8 @@ RUN ARCH=$(case "$TARGETARCH" in \
         *) echo "$TARGETARCH" ;; \
     esac) && \
     FORMATTED_VERSION=$(echo $VERSION | sed 's/\.LTS/-LTS/g; s/\.SP/-SP/g') && \
-    wget https://repo.openeuler.org/openEuler-$VERSION/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
-
-RUN tar -xf openEuler-docker.$TARGETARCH.tar.xz --exclude layer.tar
+    wget https://repo.openeuler.org/openEuler-$FORMATTED_VERSION/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz && \
+    tar -xf openEuler-docker.$ARCH.tar.xz --exclude layer.tar
 
 RUN mv *.tar openEuler-docker-rootfs.$TARGETARCH.tar
 
@@ -23,9 +24,7 @@ RUN xz -z openEuler-docker-rootfs.$TARGETARCH.tar
 RUN mkdir -p output && \
     tar xvf openEuler-docker-rootfs.$TARGETARCH.tar.xz -C output
 
-ARG BASE={{ base }}
-
-FROM {{ base }}
+FROM $BASE
 
 COPY --from=builder /output /
 
