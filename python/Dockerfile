@@ -1,8 +1,8 @@
-ARG BASE=openeuler/openeuler:24.03-lts
+ARG BASE=zhihang161013/openeuler:24.03-lts
 
 FROM ${BASE}
 
-ARG VERSION=3.9
+ARG VERSION=3.9.1
 
 ARG TARGETARCH
 

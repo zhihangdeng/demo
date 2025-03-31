@@ -2,7 +2,7 @@
   cann:
     
     needs: 
-      - python
+      - zhihang161013/python:3.9.1-oe2403lts
     
     runs-on: ubuntu-latest
     steps:
@@ -32,9 +32,11 @@
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts
+            docker.io/zhihang161013/cann:8.0.0.beta1-python3.9.1-oe2403lts
             
           file: ${{ github.workspace }}/cann/Dockerfile
           context: ${{ github.workspace }}/cann

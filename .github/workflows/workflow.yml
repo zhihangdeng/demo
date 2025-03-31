@@ -5,6 +5,9 @@ jobs:
   
   openeuler:
     
+    needs: 
+      - scratch
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,9 +36,11 @@ jobs:
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/openeuler:24.03-lts
+            docker.io/zhihang161013/openeuler:24.03-lts
             
           file: ${{ github.workspace }}/openeuler/Dockerfile
           context: ${{ github.workspace }}/openeuler
@@ -43,7 +48,7 @@ jobs:
   python:
     
     needs: 
-      - openeuler
+      - zhihang161013/openeuler:24.03-lts
     
     runs-on: ubuntu-latest
     steps:
@@ -73,9 +78,11 @@ jobs:
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/python:3.9-oe2403lts
+            docker.io/zhihang161013/python:3.9.1-oe2403lts
             
           file: ${{ github.workspace }}/python/Dockerfile
           context: ${{ github.workspace }}/python
@@ -83,7 +90,7 @@ jobs:
   cann:
     
     needs: 
-      - python
+      - zhihang161013/python:3.9.1-oe2403lts
     
     runs-on: ubuntu-latest
     steps:
@@ -113,9 +120,11 @@ jobs:
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/cann:8.0.0.beta1-python3.9-oe2403lts
+            docker.io/zhihang161013/cann:8.0.0.beta1-python3.9.1-oe2403lts
             
           file: ${{ github.workspace }}/cann/Dockerfile
           context: ${{ github.workspace }}/cann
@@ -123,7 +132,7 @@ jobs:
   pytorch:
     
     needs: 
-      - cann
+      - zhihang161013/cann:8.0.0.beta1-python3.9.1-oe2403lts
     
     runs-on: ubuntu-latest
     steps:
@@ -153,9 +162,11 @@ jobs:
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/pytorch:2.5.1-cann8.0.0.beta1-python3.9-oe2403lts
+            docker.io/zhihang161013/pytorch:2.5.1-cann8.0.0.beta1-python3.9.1-oe2403lts
             
           file: ${{ github.workspace }}/pytorch/Dockerfile
           context: ${{ github.workspace }}/pytorch

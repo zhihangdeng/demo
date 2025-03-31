@@ -2,7 +2,7 @@
   python:
     
     needs: 
-      - openeuler
+      - zhihang161013/openeuler:24.03-lts
     
     runs-on: ubuntu-latest
     steps:
@@ -32,9 +32,11 @@
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/python:3.9-oe2403lts
+            docker.io/zhihang161013/python:3.9.1-oe2403lts
             
           file: ${{ github.workspace }}/python/Dockerfile
           context: ${{ github.workspace }}/python

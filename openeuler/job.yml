@@ -1,6 +1,9 @@
   
   openeuler:
     
+    needs: 
+      - scratch
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,9 +32,11 @@
             
             x86_64
             
+            aarch64
+            
           tags: |
             
-            docker.io/openeuler/openeuler:24.03-lts
+            docker.io/zhihang161013/openeuler:24.03-lts
             
           file: ${{ github.workspace }}/openeuler/Dockerfile
           context: ${{ github.workspace }}/openeuler
