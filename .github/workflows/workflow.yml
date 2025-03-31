@@ -44,6 +44,9 @@ jobs:
           push: true  
   python:
     
+    needs: 
+      - openeuler
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -83,6 +86,9 @@ jobs:
           push: true  
   cann:
     
+    needs: 
+      - python
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -121,6 +127,9 @@ jobs:
           context: ${{ github.workspace }}/cann
           push: true  
   pytorch:
+    
+    needs: 
+      - cann
     
     runs-on: ubuntu-latest
     steps:

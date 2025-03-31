@@ -1,8 +1,8 @@
   
   {{ name }}:
-    {% if base %}
+    {% if need %}
     needs: 
-      - {{ base }}
+      - {{ need }}
     {% endif %}
     runs-on: ubuntu-latest
     steps:

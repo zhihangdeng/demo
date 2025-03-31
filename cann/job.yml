@@ -1,6 +1,9 @@
   
   cann:
     
+    needs: 
+      - python
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
