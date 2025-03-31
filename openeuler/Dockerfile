@@ -9,7 +9,7 @@ ARG VERSION=24.03.LTS
 
 RUN yum install -y wget xz tar
 
-RUN ARCH=${ARCH_MAP_${TARGETARCH}} \
+RUN ARCH=$ARCH_MAP_$TARGETARCH \
     && wget https://repo.openeuler.org/openEuler-$VERSION-LTS/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
 
 RUN tar -xf openEuler-docker.$TARGETARCH.tar.xz --exclude layer.tar
