@@ -11,7 +11,7 @@ RUN ARCH=$(case "$TARGETARCH" in \
         "arm64") echo "aarch64" ;; \
         *) echo "$TARGETARCH" ;; \
     esac) \
-    && wget https://repo.openeuler.org/openEuler-$VERSION-LTS/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
+    && wget https://repo.openeuler.org/openEuler-$VERSION/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
 
 RUN tar -xf openEuler-docker.$TARGETARCH.tar.xz --exclude layer.tar
 
