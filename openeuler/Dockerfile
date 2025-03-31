@@ -1,6 +1,6 @@
 ARG TARGETARCH
 
-FROM openeuler:24.03-lts as builder
+FROM openeuler/openeuler:24.03-lts as builder
 
 ARG VERSION=24.03.LTS
 
