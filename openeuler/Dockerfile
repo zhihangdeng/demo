@@ -2,11 +2,15 @@ FROM openeuler/openeuler:24.03-lts as builder
 
 ARG TARGETARCH
 
+ARG ARCH_MAP_amd64=x86_64
+ARG ARCH_MAP_arm64=aarch64
+
 ARG VERSION=24.03.LTS
 
 RUN yum install -y wget xz tar
 
-RUN wget https://repo.openeuler.org/openEuler-$VERSION-LTS/docker_img/$TARGETARCH/openEuler-docker.$TARGETARCH.tar.xz
+RUN ARCH=${ARCH_MAP_${TARGETARCH}} \
+    && wget https://repo.openeuler.org/openEuler-$VERSION-LTS/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
 
 RUN tar -xf openEuler-docker.$TARGETARCH.tar.xz --exclude layer.tar
 
