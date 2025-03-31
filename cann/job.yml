@@ -1,9 +1,6 @@
   
   cann:
     
-    needs: 
-      - zhihang161013/python:3.9.1-oe2403lts
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

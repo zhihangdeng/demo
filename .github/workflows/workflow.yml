@@ -5,9 +5,6 @@ jobs:
   
   openeuler:
     
-    needs: 
-      - scratch
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -46,9 +43,6 @@ jobs:
           context: ${{ github.workspace }}/openeuler
           push: true  
   python:
-    
-    needs: 
-      - zhihang161013/openeuler:24.03-lts
     
     runs-on: ubuntu-latest
     steps:
@@ -89,9 +83,6 @@ jobs:
           push: true  
   cann:
     
-    needs: 
-      - zhihang161013/python:3.9.1-oe2403lts
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -130,9 +121,6 @@ jobs:
           context: ${{ github.workspace }}/cann
           push: true  
   pytorch:
-    
-    needs: 
-      - zhihang161013/cann:8.0.0.beta1-python3.9.1-oe2403lts
     
     runs-on: ubuntu-latest
     steps:

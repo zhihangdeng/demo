@@ -1,9 +1,6 @@
   
   openeuler:
     
-    needs: 
-      - scratch
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,9 +1,6 @@
   
   python:
     
-    needs: 
-      - zhihang161013/openeuler:24.03-lts
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
