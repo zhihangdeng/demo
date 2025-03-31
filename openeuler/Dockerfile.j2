@@ -10,8 +10,9 @@ RUN ARCH=$(case "$TARGETARCH" in \
         "amd64") echo "x86_64" ;; \
         "arm64") echo "aarch64" ;; \
         *) echo "$TARGETARCH" ;; \
-    esac) \
-    && wget https://repo.openeuler.org/openEuler-$VERSION/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
+    esac) && \
+    FORMATTED_VERSION=$(echo $VERSION | sed 's/\.LTS/-LTS/g; s/\.SP/-SP/g') && \
+    wget https://repo.openeuler.org/openEuler-$VERSION/docker_img/$ARCH/openEuler-docker.$ARCH.tar.xz
 
 RUN tar -xf openEuler-docker.$TARGETARCH.tar.xz --exclude layer.tar
 
