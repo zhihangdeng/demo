@@ -3,7 +3,6 @@ name: EulerPublisher 🚀
 on: [push]
 jobs:
 
-
   openeuler:
     
     runs-on: ubuntu-latest
@@ -43,7 +42,6 @@ jobs:
           file: ${{ github.workspace }}/openeuler/Dockerfile
           context: ${{ github.workspace }}/openeuler
           push: true
-
   python:
     
     needs: 
@@ -86,7 +84,6 @@ jobs:
           file: ${{ github.workspace }}/python/Dockerfile
           context: ${{ github.workspace }}/python
           push: true
-
   cann:
     
     needs: 
@@ -129,7 +126,6 @@ jobs:
           file: ${{ github.workspace }}/cann/Dockerfile
           context: ${{ github.workspace }}/cann
           push: true
-
   pytorch:
     
     needs: 
