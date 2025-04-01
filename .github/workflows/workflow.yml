@@ -5,9 +5,6 @@ jobs:
 
   python:
     
-    needs: 
-      - openeuler
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
