@@ -19,6 +19,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+        
+      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -38,6 +46,8 @@ jobs:
           tags: |
             
             docker.io/zhihang161013/openeuler:22.03-lts
+            
+            quay.io/zhihang161013/openeuler:22.03-lts
             
           file: ${{ github.workspace }}/openeuler/Dockerfile
           context: ${{ github.workspace }}/openeuler
@@ -74,6 +84,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+        
+      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -93,6 +111,8 @@ jobs:
           tags: |
             
             docker.io/zhihang161013/python:3.9.1-oe2203lts
+            
+            quay.io/zhihang161013/python:3.9.1-oe2203lts
             
           file: ${{ github.workspace }}/python/Dockerfile
           context: ${{ github.workspace }}/python
@@ -129,6 +149,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+        
+      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -148,6 +176,8 @@ jobs:
           tags: |
             
             docker.io/zhihang161013/cann:8.0.0.beta1-python3.9.1-oe2203lts
+            
+            quay.io/zhihang161013/cann:8.0.0.beta1-python3.9.1-oe2203lts
             
           file: ${{ github.workspace }}/cann/Dockerfile
           context: ${{ github.workspace }}/cann
@@ -184,6 +214,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+        
+      
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -203,6 +241,8 @@ jobs:
           tags: |
             
             docker.io/zhihang161013/pytorch:2.5.1-cann8.0.0.beta1-python3.9.1-oe2203lts
+            
+            quay.io/zhihang161013/pytorch:2.5.1-cann8.0.0.beta1-python3.9.1-oe2203lts
             
           file: ${{ github.workspace }}/pytorch/Dockerfile
           context: ${{ github.workspace }}/pytorch
