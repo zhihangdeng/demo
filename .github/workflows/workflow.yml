@@ -14,6 +14,6 @@ jobs:
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
           RABBIT_USERNAME: ${{ secrets.RABBIT_USERNAME }}
           RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
-          RABBIT_PORT: 5671
+          RABBIT_PORT: 5672
           RABBIT_USE_SSL: true
           DURABLE: false
