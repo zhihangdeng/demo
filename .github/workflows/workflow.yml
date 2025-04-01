@@ -1,32 +1,19 @@
-name: Context testing
+name: test
 on: push
 
 jobs:
-  dump_contexts_to_log:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
-
+      - name: Publish message to EulerPublisher
+        uses: eferraris/rabbit-sender@v1
+        with:
+          MESSAGE: "Status for building and publishing {{ name }}:{{ tag }}: {% raw %}${{ job.status }}{% endraw %}"
+          RABBIT_EXCHANGE_NAME: "eulerpublisher"
+          ROUTING_KEY: "tracker"
+          RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
+          RABBIT_USERNAME: ${{ secrets.RABBIT_USERNAME }}
+          RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
+          RABBIT_PORT: 5671
+          RABBIT_USE_SSL: true
+          DURABLE: false
