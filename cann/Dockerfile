@@ -1,5 +1,5 @@
 # Stage 1: Install CANN
-FROM zhihang161013/python:3.9.1-oe2403lts AS cann-installer
+FROM zhihang161013/python:python3.9.1-oe2403lts AS cann-installer
 
 # Arguments
 ARG TARGETPLATFORM
@@ -69,7 +69,7 @@ RUN export ASCEND_HOME_PATH=/usr/local/Ascend && \
 fi
     
 # Stage 2: Copy results from previous stages
-FROM zhihang161013/python:3.9.1-oe2403lts AS official
+FROM zhihang161013/python:python3.9.1-oe2403lts AS official
 
 # Environment variables
 ENV LD_LIBRARY_PATH=/usr/local/Ascend/driver/lib64/common:/usr/local/Ascend/driver/lib64/driver:${LD_LIBRARY_PATH}

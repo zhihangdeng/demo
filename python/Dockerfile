@@ -1,4 +1,4 @@
-ARG BASE=zhihang161013/openeuler:24.03-lts
+ARG BASE=zhihang161013/openeuler:oe2403lts
 
 FROM ${BASE}
 

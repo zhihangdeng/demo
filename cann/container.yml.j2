@@ -1,8 +1,9 @@
-  
+
+
   {{ name }}:
-    {% if need %}
+    {% if needs %}
     needs: 
-      - {{ need }}
+      - {{ needs }}
     {% endif %}
     runs-on: ubuntu-latest
     steps:
