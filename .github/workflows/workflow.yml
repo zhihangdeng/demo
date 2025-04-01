@@ -1,6 +1,5 @@
 
 name: EulerPublisher 🚀
-run-name: Artifact type: container
 on: [push]
 jobs:
 
