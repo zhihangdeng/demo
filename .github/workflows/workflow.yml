@@ -5,7 +5,7 @@ jobs:
 
   openeuler:
     
-    runs-on: self-hosted
+    runs-on: 34-238-121-146
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
     needs: 
       - openeuler
     
-    runs-on: self-hosted
+    runs-on: 34-238-121-146
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -149,7 +149,7 @@ jobs:
     needs: 
       - python
     
-    runs-on: self-hosted
+    runs-on: 34-238-121-146
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -221,7 +221,7 @@ jobs:
     needs: 
       - cann
     
-    runs-on: self-hosted
+    runs-on: 34-238-121-146
     steps:
       - name: Checkout
         uses: actions/checkout@v4
