@@ -5,7 +5,7 @@ jobs:
 
   build-openeuler:
     
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -75,7 +75,7 @@ jobs:
           retention-days: 1
 
   push-openeuler:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs:
       - build-openeuler
     steps:
@@ -137,7 +137,7 @@ jobs:
     needs: 
       - push-openeuler
     
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -207,7 +207,7 @@ jobs:
           retention-days: 1
 
   push-python:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs:
       - build-python
     steps:
@@ -269,7 +269,7 @@ jobs:
     needs: 
       - push-python
     
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -339,7 +339,7 @@ jobs:
           retention-days: 1
 
   push-cann:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs:
       - build-cann
     steps:
@@ -401,7 +401,7 @@ jobs:
     needs: 
       - push-cann
     
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -471,7 +471,7 @@ jobs:
           retention-days: 1
 
   push-pytorch:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs:
       - build-pytorch
     steps:
