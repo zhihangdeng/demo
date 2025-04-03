@@ -60,7 +60,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-openeuler-${{ arch }}
+          name: digests-openeuler-x86_64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -122,7 +122,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-openeuler-${{ arch }}
+          name: digests-openeuler-aarch64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -250,7 +250,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-python-${{ arch }}
+          name: digests-python-x86_64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -315,7 +315,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-python-${{ arch }}
+          name: digests-python-aarch64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -443,7 +443,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-cann-${{ arch }}
+          name: digests-cann-x86_64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -508,7 +508,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-cann-${{ arch }}
+          name: digests-cann-aarch64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -636,7 +636,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-pytorch-${{ arch }}
+          name: digests-pytorch-x86_64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -701,7 +701,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-pytorch-${{ arch }}
+          name: digests-pytorch-aarch64
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
