@@ -16,6 +16,9 @@ jobs:
           - aarch64
         
     steps:
+      - name: test
+        run: 
+          echo ${{ runner.arch }}
       - name: Checkout
         uses: actions/checkout@v4
         
@@ -69,7 +72,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.platform }}
+          name: digests-openeuler-${{ matrix.platform }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -148,6 +151,9 @@ jobs:
           - aarch64
         
     steps:
+      - name: test
+        run: 
+          echo ${{ runner.arch }}
       - name: Checkout
         uses: actions/checkout@v4
         
@@ -201,7 +207,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.platform }}
+          name: digests-python-${{ matrix.platform }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -280,6 +286,9 @@ jobs:
           - aarch64
         
     steps:
+      - name: test
+        run: 
+          echo ${{ runner.arch }}
       - name: Checkout
         uses: actions/checkout@v4
         
@@ -333,7 +342,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.platform }}
+          name: digests-cann-${{ matrix.platform }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -412,6 +421,9 @@ jobs:
           - aarch64
         
     steps:
+      - name: test
+        run: 
+          echo ${{ runner.arch }}
       - name: Checkout
         uses: actions/checkout@v4
         
@@ -465,7 +477,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.platform }}
+          name: digests-pytorch-${{ matrix.platform }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
