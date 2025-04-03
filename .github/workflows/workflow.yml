@@ -58,7 +58,7 @@ jobs:
       - name: Publish message to EulerPublisher
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ 'repository': 'zhihang161013', 'name': 'openeuler', 'tag': '22.03-lts', 'status': '${{ job.status }}' }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"openeuler\", \"tag\": \"22.03-lts\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
@@ -125,7 +125,7 @@ jobs:
       - name: Publish message to EulerPublisher
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ 'repository': 'zhihang161013', 'name': 'python', 'tag': '3.9.1-oe2203lts', 'status': '${{ job.status }}' }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"python\", \"tag\": \"3.9.1-oe2203lts\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
@@ -192,7 +192,7 @@ jobs:
       - name: Publish message to EulerPublisher
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ 'repository': 'zhihang161013', 'name': 'cann', 'tag': '8.0.0.beta1-python3.9.1-oe2203lts', 'status': '${{ job.status }}' }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"cann\", \"tag\": \"8.0.0.beta1-python3.9.1-oe2203lts\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
@@ -259,7 +259,7 @@ jobs:
       - name: Publish message to EulerPublisher
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ 'repository': 'zhihang161013', 'name': 'pytorch', 'tag': '2.5.1-cann8.0.0.beta1-python3.9.1-oe2203lts', 'status': '${{ job.status }}' }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"pytorch\", \"tag\": \"2.5.1-cann8.0.0.beta1-python3.9.1-oe2203lts\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
