@@ -1,6 +1,6 @@
 ARG BASE=zhihang161013/openeuler:22.03-lts
 
-FROM ${BASE}
+FROM openeuler/openeuler:24.03-lts as builder
 
 ARG VERSION=3.9.1
 
@@ -27,10 +27,10 @@ RUN yum update -y && \
         libev-devel \
         expat-devel \
         libffi-devel \
-        systemtap-sdt-devel \
-    && yum clean all \
-    && rm -rf /var/cache/yum \
-    && rm -rf /tmp/*
+        systemtap-sdt-devel && \
+    yum clean all && \
+    rm -rf /var/cache/yum && \
+    rm -rf /tmp/*
 
 RUN VERSION_SHORT=$(echo "${VERSION}" | cut -d. -f1,2) && \
     PY_HOME=/usr/local/python${VERSION_SHORT} && \
@@ -45,12 +45,12 @@ RUN VERSION_SHORT=$(echo "${VERSION}" | cut -d. -f1,2) && \
     make altinstall && \
     rm -rf /tmp/${PY_INSTALLER_TGZ} /tmp/${PY_INSTALLER_DIR}
 
+FROM ${BASE} AS official
+
+ARG VERSION
+
+COPY --from=builder /usr/local/python* /usr/local/
+
 RUN VERSION_SHORT=$(echo "${VERSION}" | cut -d. -f1,2) && \
-    VERSION_MAJOR=$(echo "${VERSION}" | cut -d. -f1) && \
-    PY_HOME=/usr/local/python${VERSION_SHORT} && \
-    ln -sf ${PY_HOME}/bin/python${VERSION_SHORT} /usr/bin/python${VERSION_SHORT} && \
-    ln -sf ${PY_HOME}/bin/pip${VERSION_SHORT} /usr/bin/pip${VERSION_SHORT} && \
-    ln -sf /usr/bin/python${VERSION_SHORT} /usr/bin/python${VERSION_MAJOR} && \
-    ln -sf /usr/bin/pip${PY_VERSION} /usr/bin/pip${VERSION_MAJOR} && \
-    ln -sf /usr/bin/python${VERSION_MAJOR} /usr/bin/python && \
-    ln -sf /usr/bin/pip${VERSION_MAJOR} /usr/bin/pip
+    echo "export PATH=/usr/local/python${VERSION_SHORT}/bin:${PATH}" >> /etc/profile && \
+    echo "export PATH=/usr/local/python${VERSION_SHORT}/bin:${PATH}" >> ~/.bashrc

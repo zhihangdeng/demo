@@ -8,9 +8,32 @@ FROM ascendai/python:${PY_VERSION}-openeuler22.03 AS cann-installer
 # Arguments
 ARG TARGETARCH
 ARG CANN_CHIP=910b
-ARG CANN_VERSION=8.0.0.beta1
+ARG CANN_VERSION=8.0.RC2.alpha001
 ARG BASE_URL=https://ascend-repo.obs.cn-east-2.myhuaweicloud.com
 
+# Install dependencies
+RUN yum update -y && \
+    yum install -y \
+        gcc \
+        gcc-c++ \
+        make \
+        cmake \
+        unzip \
+        zlib-devel \
+        libffi-devel \
+        openssl-devel \
+        pciutils \
+        net-tools \
+        sqlite-devel \
+        lapack-devel \
+        gcc-gfortran \
+        util-linux \
+        findutils \
+        curl \
+        wget \
+    && yum clean all \
+    && rm -rf /var/cache/yum
+    
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
         ARCH="x86_64"; \
     else \
@@ -56,29 +79,6 @@ RUN if echo "${CANN_VERSION}" | grep -q "alpha"; then \
     echo "${CANN_TOOLKIT_URL}" > /tmp/toolkit_url_file.txt && \
     echo "${CANN_KERNELS_URL}" > /tmp/kernels_url_file.txt && \
     echo "${CANN_NNAL_URL}" > /tmp/nnal_url_file.txt
-
-# Install dependencies
-RUN yum update -y && \
-    yum install -y \
-        gcc \
-        gcc-c++ \
-        make \
-        cmake \
-        unzip \
-        zlib-devel \
-        libffi-devel \
-        openssl-devel \
-        pciutils \
-        net-tools \
-        sqlite-devel \
-        lapack-devel \
-        gcc-gfortran \
-        util-linux \
-        findutils \
-        curl \
-        wget \
-    && yum clean all \
-    && rm -rf /var/cache/yum
 
 RUN CANN_TOOLKIT_URL=$(cat /tmp/toolkit_url_file.txt) && \
     wget ${CANN_TOOLKIT_URL} -O ~/Ascend-cann-toolkit.run && \

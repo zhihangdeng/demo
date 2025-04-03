@@ -24,7 +24,7 @@ RUN xz -z openEuler-docker-rootfs.${TARGETARCH}.tar
 RUN mkdir -p output && \
     tar xvf openEuler-docker-rootfs.${TARGETARCH}.tar.xz -C output
 
-FROM ${BASE}
+FROM ${BASE} AS official
 
 COPY --from=builder /output /
 
