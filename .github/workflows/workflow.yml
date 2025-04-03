@@ -53,15 +53,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/openeuler/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/openeuler/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-openeuler-x86_64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/openeuler/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -115,15 +115,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/openeuler/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/openeuler/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-openeuler-aarch64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/openeuler/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -140,7 +140,7 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
-          path: ${{ runner.temp }}/digests
+          path: ${{ runner.temp }}/openeuler/digests
           pattern: digests-*
           merge-multiple: true
 
@@ -244,15 +244,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/python/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/python/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-python-x86_64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/python/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -309,15 +309,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/python/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/python/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-python-aarch64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/python/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -334,7 +334,7 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
-          path: ${{ runner.temp }}/digests
+          path: ${{ runner.temp }}/python/digests
           pattern: digests-*
           merge-multiple: true
 
@@ -438,15 +438,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/cann/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/cann/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-cann-x86_64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/cann/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -503,15 +503,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/cann/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/cann/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-cann-aarch64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/cann/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -528,7 +528,7 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
-          path: ${{ runner.temp }}/digests
+          path: ${{ runner.temp }}/cann/digests
           pattern: digests-*
           merge-multiple: true
 
@@ -632,15 +632,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/pytorch/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/pytorch/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-pytorch-x86_64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/pytorch/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -697,15 +697,15 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p ${{ runner.temp }}/digests
+          mkdir -p ${{ runner.temp }}/pytorch/digests
           digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+          touch "${{ runner.temp }}/pytorch/digests/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
           name: digests-pytorch-aarch64
-          path: ${{ runner.temp }}/digests/*
+          path: ${{ runner.temp }}/pytorch/digests/*
           if-no-files-found: error
           retention-days: 1
   
@@ -722,7 +722,7 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
-          path: ${{ runner.temp }}/digests
+          path: ${{ runner.temp }}/pytorch/digests
           pattern: digests-*
           merge-multiple: true
 
