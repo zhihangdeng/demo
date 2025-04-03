@@ -13,6 +13,8 @@ jobs:
         
           - x86_64
         
+          - aarch64
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -142,6 +144,8 @@ jobs:
         platform:
         
           - x86_64
+        
+          - aarch64
         
     steps:
       - name: Checkout
@@ -273,6 +277,8 @@ jobs:
         
           - x86_64
         
+          - aarch64
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -402,6 +408,8 @@ jobs:
         platform:
         
           - x86_64
+        
+          - aarch64
         
     steps:
       - name: Checkout
