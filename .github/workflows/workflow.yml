@@ -3,9 +3,16 @@ name: EulerPublisher 🚀
 on: [push]
 jobs:
 
-  openeuler:
+  build-openeuler:
     
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+        
+          - x86_64
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +33,7 @@ jobs:
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
+          password: ${{ secrets.QUAY_TOKEN }}
         
       
 
@@ -36,22 +43,82 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker images
+      - name: Build and push by digest
         uses: docker/build-push-action@v6
+        id: build
         with: 
-          platforms: |
-            
-            x86_64
-            
+          platforms: ${{ matrix.platform }}
           tags: |
             
-            docker.io/zhihang161013/openeuler:22.03-lts
+            docker.io/zhihang161013/openeuler
             
-            quay.io/zhihang161013/openeuler:22.03-lts
+            quay.io/zhihang161013/openeuler
             
           file: ${{ github.workspace }}/openeuler/Dockerfile
           context: ${{ github.workspace }}/openeuler
-          push: true
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        run: |
+          mkdir -p ${{ runner.temp }}/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+
+      - name: Upload digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-${{ matrix.platform }}
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  push-openeuler:
+    runs-on: self-hosted
+    needs:
+      - build-openeuler:
+    steps:
+      - name: Download digests
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: digests-*
+          merge-multiple: true
+
+      
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+      
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+        
+      
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Create manifest list and push
+        working-directory: ${{ runner.temp }}/digests
+        run: |
+          
+            docker.io/zhihang161013/openeuler:22.03-lts
+          docker buildx imagetools create -t docker.io/zhihang161013/openeuler:22.03-lts \
+            $(printf 'zhihang161013/openeuler@sha256:%s ' *)
+          
+            quay.io/zhihang161013/openeuler:22.03-lts
+          docker buildx imagetools create -t quay.io/zhihang161013/openeuler:22.03-lts \
+            $(printf 'zhihang161013/openeuler@sha256:%s ' *)
+          
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
@@ -65,12 +132,19 @@ jobs:
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
           DURABLE: false
-  python:
+  build-python:
     
     needs: 
       - openeuler
     
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+        
+          - x86_64
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -91,7 +165,7 @@ jobs:
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
+          password: ${{ secrets.QUAY_TOKEN }}
         
       
 
@@ -101,22 +175,82 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker images
+      - name: Build and push by digest
         uses: docker/build-push-action@v6
+        id: build
         with: 
-          platforms: |
-            
-            x86_64
-            
+          platforms: ${{ matrix.platform }}
           tags: |
             
-            docker.io/zhihang161013/python:3.9.1-oe2203lts
+            docker.io/zhihang161013/python
             
-            quay.io/zhihang161013/python:3.9.1-oe2203lts
+            quay.io/zhihang161013/python
             
           file: ${{ github.workspace }}/python/Dockerfile
           context: ${{ github.workspace }}/python
-          push: true
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        run: |
+          mkdir -p ${{ runner.temp }}/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+
+      - name: Upload digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-${{ matrix.platform }}
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  push-python:
+    runs-on: self-hosted
+    needs:
+      - build-python:
+    steps:
+      - name: Download digests
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: digests-*
+          merge-multiple: true
+
+      
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+      
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+        
+      
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Create manifest list and push
+        working-directory: ${{ runner.temp }}/digests
+        run: |
+          
+            docker.io/zhihang161013/python:3.9.1-oe2203lts
+          docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2203lts \
+            $(printf 'zhihang161013/python@sha256:%s ' *)
+          
+            quay.io/zhihang161013/python:3.9.1-oe2203lts
+          docker buildx imagetools create -t quay.io/zhihang161013/python:3.9.1-oe2203lts \
+            $(printf 'zhihang161013/python@sha256:%s ' *)
+          
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
@@ -130,12 +264,19 @@ jobs:
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
           DURABLE: false
-  cann:
+  build-cann:
     
     needs: 
       - python
     
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+        
+          - x86_64
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -156,7 +297,7 @@ jobs:
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
+          password: ${{ secrets.QUAY_TOKEN }}
         
       
 
@@ -166,22 +307,82 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker images
+      - name: Build and push by digest
         uses: docker/build-push-action@v6
+        id: build
         with: 
-          platforms: |
-            
-            x86_64
-            
+          platforms: ${{ matrix.platform }}
           tags: |
             
-            docker.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts
+            docker.io/zhihang161013/cann
             
-            quay.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts
+            quay.io/zhihang161013/cann
             
           file: ${{ github.workspace }}/cann/Dockerfile
           context: ${{ github.workspace }}/cann
-          push: true
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        run: |
+          mkdir -p ${{ runner.temp }}/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+
+      - name: Upload digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-${{ matrix.platform }}
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  push-cann:
+    runs-on: self-hosted
+    needs:
+      - build-cann:
+    steps:
+      - name: Download digests
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: digests-*
+          merge-multiple: true
+
+      
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+      
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+        
+      
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Create manifest list and push
+        working-directory: ${{ runner.temp }}/digests
+        run: |
+          
+            docker.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts
+          docker buildx imagetools create -t docker.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts \
+            $(printf 'zhihang161013/cann@sha256:%s ' *)
+          
+            quay.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts
+          docker buildx imagetools create -t quay.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts \
+            $(printf 'zhihang161013/cann@sha256:%s ' *)
+          
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
@@ -195,12 +396,19 @@ jobs:
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
           DURABLE: false
-  pytorch:
+  build-pytorch:
     
     needs: 
       - cann
     
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+        
+          - x86_64
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -221,7 +429,7 @@ jobs:
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
+          password: ${{ secrets.QUAY_TOKEN }}
         
       
 
@@ -231,22 +439,82 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker images
+      - name: Build and push by digest
         uses: docker/build-push-action@v6
+        id: build
         with: 
-          platforms: |
-            
-            x86_64
-            
+          platforms: ${{ matrix.platform }}
           tags: |
             
-            docker.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts
+            docker.io/zhihang161013/pytorch
             
-            quay.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts
+            quay.io/zhihang161013/pytorch
             
           file: ${{ github.workspace }}/pytorch/Dockerfile
           context: ${{ github.workspace }}/pytorch
-          push: true
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        run: |
+          mkdir -p ${{ runner.temp }}/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+
+      - name: Upload digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-${{ matrix.platform }}
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  push-pytorch:
+    runs-on: self-hosted
+    needs:
+      - build-pytorch:
+    steps:
+      - name: Download digests
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: digests-*
+          merge-multiple: true
+
+      
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+      
+        
+      - name: Login to Quay.io
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+        
+      
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Create manifest list and push
+        working-directory: ${{ runner.temp }}/digests
+        run: |
+          
+            docker.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts
+          docker buildx imagetools create -t docker.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts \
+            $(printf 'zhihang161013/pytorch@sha256:%s ' *)
+          
+            quay.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts
+          docker buildx imagetools create -t quay.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts \
+            $(printf 'zhihang161013/pytorch@sha256:%s ' *)
+          
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
