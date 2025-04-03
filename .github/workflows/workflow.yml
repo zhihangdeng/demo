@@ -135,7 +135,7 @@ jobs:
   build-python:
     
     needs: 
-      - openeuler
+      - push-openeuler
     
     runs-on: self-hosted
     strategy:
@@ -267,7 +267,7 @@ jobs:
   build-cann:
     
     needs: 
-      - python
+      - push-python
     
     runs-on: self-hosted
     strategy:
@@ -399,7 +399,7 @@ jobs:
   build-pytorch:
     
     needs: 
-      - cann
+      - push-cann
     
     runs-on: self-hosted
     strategy:
