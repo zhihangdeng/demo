@@ -170,6 +170,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
         run: |
+          ls
           
           docker buildx imagetools create -t docker.io/zhihang161013/openeuler:22.03-lts \
             $(printf 'zhihang161013/openeuler@sha256:%s ' *)
@@ -363,6 +364,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
         run: |
+          ls
           
           docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2203lts \
             $(printf 'zhihang161013/python@sha256:%s ' *)
@@ -556,6 +558,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
         run: |
+          ls
           
           docker buildx imagetools create -t docker.io/zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts \
             $(printf 'zhihang161013/cann@sha256:%s ' *)
@@ -749,6 +752,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
         run: |
+          ls
           
           docker buildx imagetools create -t docker.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha001-python3.9.1-oe2203lts \
             $(printf 'zhihang161013/pytorch@sha256:%s ' *)
