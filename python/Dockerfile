@@ -1,4 +1,4 @@
-ARG BASE=zhihang161013/openeuler:22.03-lts
+ARG BASE=zhihang161013/openeuler:24.03-lts
 
 FROM openeuler/openeuler:24.03-lts as builder
 

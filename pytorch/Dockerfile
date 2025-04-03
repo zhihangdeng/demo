@@ -1,4 +1,4 @@
-ARG BASE=zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2203lts
+ARG BASE=zhihang161013/cann:8.0.RC2.alpha001-python3.9.1-oe2403lts
 
 FROM ${BASE}
 
