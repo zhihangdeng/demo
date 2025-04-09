@@ -177,19 +177,7 @@ jobs:
           docker buildx imagetools create -t quay.io/zhihang161013/openeuler:24.03-lts \
             $(printf 'zhihang161013/openeuler@sha256:%s ' *)
           
-
-      - name: Check status
-        uses: eferraris/rabbit-sender@v1
-        with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"openeuler\", \"tag\": \"24.03-lts\", \"status\": \"${{ job.status }}\" }"
-          RABBIT_EXCHANGE_NAME: "eulerpublisher"
-          ROUTING_KEY: "tracker"
-          RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
-          RABBIT_USERNAME: ${{ secrets.RABBIT_USERNAME }}
-          RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
-          RABBIT_PORT: 5672
-          RABBIT_USE_SSL: false
-          DURABLE: false  
+  
   build-python-x86_64:
     
     needs: 
@@ -370,19 +358,7 @@ jobs:
           docker buildx imagetools create -t quay.io/zhihang161013/python:3.9.1-oe2403lts \
             $(printf 'zhihang161013/python@sha256:%s ' *)
           
-
-      - name: Check status
-        uses: eferraris/rabbit-sender@v1
-        with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"python\", \"tag\": \"3.9.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
-          RABBIT_EXCHANGE_NAME: "eulerpublisher"
-          ROUTING_KEY: "tracker"
-          RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
-          RABBIT_USERNAME: ${{ secrets.RABBIT_USERNAME }}
-          RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
-          RABBIT_PORT: 5672
-          RABBIT_USE_SSL: false
-          DURABLE: false  
+  
   build-cann-x86_64:
     
     needs: 
@@ -563,19 +539,7 @@ jobs:
           docker buildx imagetools create -t quay.io/zhihang161013/cann:8.0.RC3.alpha001-python3.9.1-oe2403lts \
             $(printf 'zhihang161013/cann@sha256:%s ' *)
           
-
-      - name: Check status
-        uses: eferraris/rabbit-sender@v1
-        with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"cann\", \"tag\": \"8.0.RC3.alpha001-python3.9.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
-          RABBIT_EXCHANGE_NAME: "eulerpublisher"
-          ROUTING_KEY: "tracker"
-          RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
-          RABBIT_USERNAME: ${{ secrets.RABBIT_USERNAME }}
-          RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
-          RABBIT_PORT: 5672
-          RABBIT_USE_SSL: false
-          DURABLE: false  
+  
   build-pytorch-x86_64:
     
     needs: 
@@ -756,16 +720,3 @@ jobs:
           docker buildx imagetools create -t quay.io/zhihang161013/pytorch:2.5.1-cann8.0.RC3.alpha001-python3.9.1-oe2403lts \
             $(printf 'zhihang161013/pytorch@sha256:%s ' *)
           
-
-      - name: Check status
-        uses: eferraris/rabbit-sender@v1
-        with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"pytorch\", \"tag\": \"2.5.1-cann8.0.RC3.alpha001-python3.9.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
-          RABBIT_EXCHANGE_NAME: "eulerpublisher"
-          ROUTING_KEY: "tracker"
-          RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
-          RABBIT_USERNAME: ${{ secrets.RABBIT_USERNAME }}
-          RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
-          RABBIT_PORT: 5672
-          RABBIT_USE_SSL: false
-          DURABLE: false
