@@ -67,7 +67,7 @@ jobs:
   
   build-openeuler-aarch64:
     
-    runs-on: self-hosted
+    runs-on: self-hosted-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -129,7 +129,7 @@ jobs:
   
 
   push-openeuler:
-    runs-on: [ self-hosted, x64 ]
+    runs-on: self-hosted
     needs:
       
       - build-openeuler-x86_64
@@ -260,7 +260,7 @@ jobs:
     needs: 
       - push-openeuler
     
-    runs-on: self-hosted
+    runs-on: self-hosted-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -322,7 +322,7 @@ jobs:
   
 
   push-python:
-    runs-on: [ self-hosted, x64 ]
+    runs-on: self-hosted
     needs:
       
       - build-python-x86_64
@@ -453,7 +453,7 @@ jobs:
     needs: 
       - push-python
     
-    runs-on: self-hosted
+    runs-on: self-hosted-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -515,7 +515,7 @@ jobs:
   
 
   push-cann:
-    runs-on: [ self-hosted, x64 ]
+    runs-on: self-hosted
     needs:
       
       - build-cann-x86_64
@@ -646,7 +646,7 @@ jobs:
     needs: 
       - push-cann
     
-    runs-on: self-hosted
+    runs-on: self-hosted-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -708,7 +708,7 @@ jobs:
   
 
   push-pytorch:
-    runs-on: [ self-hosted, x64 ]
+    runs-on: self-hosted
     needs:
       
       - build-pytorch-x86_64
