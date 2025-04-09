@@ -8,7 +8,7 @@ FROM ascendai/python:${PY_VERSION}-openeuler22.03 AS cann-installer
 # Arguments
 ARG TARGETARCH
 ARG CANN_CHIP=910b
-ARG CANN_VERSION=8.0.RC2.alpha001
+ARG CANN_VERSION=8.0.RC3.alpha001
 ARG BASE_URL=https://ascend-repo.obs.cn-east-2.myhuaweicloud.com
 
 # Install dependencies
