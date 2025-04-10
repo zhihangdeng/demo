@@ -3,7 +3,9 @@ ARG VERSION=3.10.1
 
 FROM openeuler/openeuler:24.03-lts as builder
 
+ARG VERSION
 ARG TARGETARCH
+
 
 # Install dependencies
 RUN yum update -y && \
