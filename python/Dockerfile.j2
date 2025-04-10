@@ -59,7 +59,6 @@ RUN VERSION_SHORT=$(echo "${VERSION}" | cut -d. -f1,2) && \
     ln -sf /usr/bin/python${VERSION_SHORT} /usr/bin/python${VERSION_MAJOR} && \
     ln -sf /usr/bin/pip${VERSION_SHORT} /usr/bin/pip${VERSION_MAJOR} && \
     ln -sf /usr/bin/python${VERSION_MAJOR} /usr/bin/python && \
-    ln -sf /usr/bin/pip${VERSION_MAJOR} /usr/bin/pip
-
-RUN echo "export PATH=/usr/local/python/bin:${PATH}" >> /etc/profile && \
-    echo "export PATH=/usr/local/python/bin:${PATH}" >> ~/.bashrc
+    ln -sf /usr/bin/pip${VERSION_MAJOR} /usr/bin/pip && \
+    echo "export PATH=${PY_HOME}:${PATH}" >> /etc/profile && \
+    echo "export PATH=${PY_HOME}:${PATH}" >> ~/.bashrc
