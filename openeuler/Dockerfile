@@ -1,6 +1,6 @@
 ARG BASE=scratch
 
-ARG VERSION=24.03.LTS
+ARG VERSION=25.03
 
 FROM openeuler/openeuler:24.03-lts as builder
 
