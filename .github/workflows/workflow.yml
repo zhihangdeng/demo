@@ -557,17 +557,17 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/cann:8.0.RC3.alpha001-python3.10.1-oe2403lts \
+          docker buildx imagetools create -t docker.io/zhihang161013/cann:8.0.RC2.alpha003-python3.10.1-oe2403lts \
             $(printf 'zhihang161013/cann@sha256:%s ' *)
           
-          docker buildx imagetools create -t quay.io/zhihang161013/cann:8.0.RC3.alpha001-python3.10.1-oe2403lts \
+          docker buildx imagetools create -t quay.io/zhihang161013/cann:8.0.RC2.alpha003-python3.10.1-oe2403lts \
             $(printf 'zhihang161013/cann@sha256:%s ' *)
           
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"cann\", \"tag\": \"8.0.RC3.alpha001-python3.10.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"cann\", \"tag\": \"8.0.RC2.alpha003-python3.10.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
@@ -750,17 +750,17 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/pytorch:2.5.1-cann8.0.RC3.alpha001-python3.10.1-oe2403lts \
+          docker buildx imagetools create -t docker.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha003-python3.10.1-oe2403lts \
             $(printf 'zhihang161013/pytorch@sha256:%s ' *)
           
-          docker buildx imagetools create -t quay.io/zhihang161013/pytorch:2.5.1-cann8.0.RC3.alpha001-python3.10.1-oe2403lts \
+          docker buildx imagetools create -t quay.io/zhihang161013/pytorch:2.5.1-cann8.0.RC2.alpha003-python3.10.1-oe2403lts \
             $(printf 'zhihang161013/pytorch@sha256:%s ' *)
           
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"pytorch\", \"tag\": \"2.5.1-cann8.0.RC3.alpha001-python3.10.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"pytorch\", \"tag\": \"2.5.1-cann8.0.RC2.alpha003-python3.10.1-oe2403lts\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}

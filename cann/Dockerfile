@@ -1,7 +1,7 @@
 # Arguments
 ARG PY_VERSION=3.10
 ARG BASE=zhihang161013/python:3.10.1-oe2403lts
-ARG CANN_VERSION=8.0.RC3.alpha001
+ARG CANN_VERSION=8.0.RC2.alpha003
 
 # Stage 1: Install CANN
 FROM ascendai/python:${PY_VERSION}-openeuler24.03 AS cann-installer
