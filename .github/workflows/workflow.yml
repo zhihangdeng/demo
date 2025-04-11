@@ -5,7 +5,7 @@ jobs:
   
   build-openeuler-x86_64:
     
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,7 +56,7 @@ jobs:
   
   build-openeuler-aarch64:
     
-    runs-on: ubuntu-latest-arm
+    runs-on: ubuntu-22.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -107,7 +107,7 @@ jobs:
   
 
   push-openeuler:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       
       - build-openeuler-x86_64
@@ -161,7 +161,7 @@ jobs:
     needs: 
       - push-openeuler
     
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -215,7 +215,7 @@ jobs:
     needs: 
       - push-openeuler
     
-    runs-on: ubuntu-latest-arm
+    runs-on: ubuntu-22.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -266,7 +266,7 @@ jobs:
   
 
   push-python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       
       - build-python-x86_64
@@ -320,7 +320,7 @@ jobs:
     needs: 
       - push-python
     
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -374,7 +374,7 @@ jobs:
     needs: 
       - push-python
     
-    runs-on: ubuntu-latest-arm
+    runs-on: ubuntu-22.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -425,7 +425,7 @@ jobs:
   
 
   push-pytorch:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       
       - build-pytorch-x86_64
@@ -458,14 +458,14 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/pytorch:2.5.0-python3.9.1-oe2503 \
+          docker buildx imagetools create -t docker.io/zhihang161013/pytorch:2.6.0-python3.9.1-oe2503 \
             $(printf 'zhihang161013/pytorch@sha256:%s ' *)
           
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"pytorch\", \"tag\": \"2.5.0-python3.9.1-oe2503\", \"status\": \"${{ job.status }}\" }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"pytorch\", \"tag\": \"2.6.0-python3.9.1-oe2503\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
