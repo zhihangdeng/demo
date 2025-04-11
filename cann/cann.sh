@@ -46,10 +46,11 @@ _download_file() {
 
 download_cann() {
     declare -A version_dict
-    version_dict["8.0.RC2.alpha001"]="V100R001C18B800TP015"
-    version_dict["8.0.RC2.alpha002"]="V100R001C18SPC805"
     version_dict["8.0.RC2.alpha003"]="V100R001C18SPC703"
-    version_dict["8.0.RC3.alpha002"]="V100R001C19SPC702"
+    version_dict["8.1.RC1.alpha001"]="V100R001C21B800TP034"
+    version_dict["8.0.0.alpha003"]="V100R001C20SPC703"
+    version_dict["8.0.0.alpha002"]="V100R001C20SPC702"
+    version_dict["8.0.0.alpha001"]="V100R001C20SPC701"
 
     local url="https://ascend-repo.obs.cn-east-2.myhuaweicloud.com"
     if [[ ${CANN_VERSION} == *alpha* ]]; then
@@ -152,7 +153,7 @@ CANN_CHIP=${CANN_CHIP:="910b"}
 CANN_VERSION=${CANN_VERSION:="8.0.0"}
 
 # NOTE: kernels are arch-specific after 8.0.RC3.alpha002
-if [[ ${CANN_VERSION} == "8.0.RC3" || ${CANN_VERSION} == "8.0.0" ]]; then
+if [[ ${CANN_VERSION} == "8.0.RC2.alpha003" || ${CANN_VERSION} == "8.1.RC1.alpha001" || ${CANN_VERSION} == "8.0.0.alpha003" || ${CANN_VERSION} == "8.0.0.alpha002" || ${CANN_VERSION} == "8.0.0.alpha001"]]; then
   KERNELS_ARCH="linux-${ARCH}"
 else
   KERNELS_ARCH="linux"
