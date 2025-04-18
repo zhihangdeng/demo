@@ -69,7 +69,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-openeuler-
+          name: digests-openeuler-${{ matrix.arch }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -113,17 +113,17 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/openeuler:25.03 \
+          docker buildx imagetools create -t docker.io/zhihang161013/openeuler:24.03-lts-sp1 \
             $(printf 'zhihang161013/openeuler@sha256:%s ' *)
           
-          docker buildx imagetools create -t quay.io/zhihang161013/openeuler:25.03 \
+          docker buildx imagetools create -t quay.io/zhihang161013/openeuler:24.03-lts-sp1 \
             $(printf 'zhihang161013/openeuler@sha256:%s ' *)
           
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"openeuler\", \"tag\": \"25.03\", \"status\": \"${{ job.status }}\" }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"openeuler\", \"tag\": \"24.03-lts-sp1\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
@@ -203,7 +203,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-python-
+          name: digests-python-${{ matrix.arch }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -247,17 +247,17 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2503 \
+          docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2403sp1 \
             $(printf 'zhihang161013/python@sha256:%s ' *)
           
-          docker buildx imagetools create -t quay.io/zhihang161013/python:3.9.1-oe2503 \
+          docker buildx imagetools create -t quay.io/zhihang161013/python:3.9.1-oe2403sp1 \
             $(printf 'zhihang161013/python@sha256:%s ' *)
           
 
       - name: Check status
         uses: eferraris/rabbit-sender@v1
         with:
-          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"python\", \"tag\": \"3.9.1-oe2503\", \"status\": \"${{ job.status }}\" }"
+          MESSAGE: "{ \"repository\": \"zhihang161013\", \"name\": \"python\", \"tag\": \"3.9.1-oe2403sp1\", \"status\": \"${{ job.status }}\" }"
           RABBIT_EXCHANGE_NAME: "eulerpublisher"
           ROUTING_KEY: "tracker"
           RABBIT_HOST: ${{ secrets.RABBIT_HOST }}
