@@ -8,10 +8,10 @@ jobs:
         include:
           
           - arch: x86_64
-            runner: ubuntu-latest
+            runner: ubuntu-24.04
           
           - arch: aarch64
-            runner: ubuntu-latest-arm64
+            runner: ubuntu-24.04-arm64
           
     
     runs-on: 
@@ -49,7 +49,7 @@ jobs:
         uses: docker/build-push-action@v6
         id: build
         with: 
-          platforms: 
+          platforms: ${{ matrix.arch }}
           tags: |
             
             docker.io/zhihang161013/openeuler
@@ -75,7 +75,7 @@ jobs:
           retention-days: 1
 
   push-openeuler:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       
       - build-openeuler-x86_64
@@ -141,10 +141,10 @@ jobs:
         include:
           
           - arch: x86_64
-            runner: ubuntu-latest
+            runner: ubuntu-24.04
           
           - arch: aarch64
-            runner: ubuntu-latest-arm64
+            runner: ubuntu-24.04-arm64
           
     
     needs: 
@@ -185,7 +185,7 @@ jobs:
         uses: docker/build-push-action@v6
         id: build
         with: 
-          platforms: 
+          platforms: ${{ matrix.arch }}
           tags: |
             
             docker.io/zhihang161013/python
@@ -211,7 +211,7 @@ jobs:
           retention-days: 1
 
   push-python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       
       - build-python-x86_64
@@ -277,10 +277,10 @@ jobs:
         include:
           
           - arch: x86_64
-            runner: ubuntu-latest
+            runner: ubuntu-24.04
           
           - arch: aarch64
-            runner: ubuntu-latest-arm64
+            runner: ubuntu-24.04-arm64
           
     
     needs: 
@@ -321,7 +321,7 @@ jobs:
         uses: docker/build-push-action@v6
         id: build
         with: 
-          platforms: 
+          platforms: ${{ matrix.arch }}
           tags: |
             
             docker.io/zhihang161013/cann
@@ -347,7 +347,7 @@ jobs:
           retention-days: 1
 
   push-cann:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       
       - build-cann-x86_64
@@ -413,10 +413,10 @@ jobs:
         include:
           
           - arch: x86_64
-            runner: ubuntu-latest
+            runner: ubuntu-24.04
           
           - arch: aarch64
-            runner: ubuntu-latest-arm64
+            runner: ubuntu-24.04-arm64
           
     
     needs: 
@@ -457,7 +457,7 @@ jobs:
         uses: docker/build-push-action@v6
         id: build
         with: 
-          platforms: 
+          platforms: ${{ matrix.arch }}
           tags: |
             
             docker.io/zhihang161013/pytorch
@@ -483,7 +483,7 @@ jobs:
           retention-days: 1
 
   push-pytorch:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       
       - build-pytorch-x86_64
