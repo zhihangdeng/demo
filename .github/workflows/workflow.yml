@@ -135,7 +135,9 @@ jobs:
           RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
-          DURABLE: false  build-python:
+          DURABLE: false
+
+            build-python:
     strategy:
       matrix:
         include:
@@ -271,7 +273,9 @@ jobs:
           RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
-          DURABLE: false  build-cann:
+          DURABLE: false
+
+            build-cann:
     strategy:
       matrix:
         include:
@@ -407,7 +411,9 @@ jobs:
           RABBIT_PASSWORD: ${{ secrets.RABBIT_PASSWORD }}
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
-          DURABLE: false  build-pytorch:
+          DURABLE: false
+
+            build-pytorch:
     strategy:
       matrix:
         include:
@@ -544,3 +550,5 @@ jobs:
           RABBIT_PORT: 5672
           RABBIT_USE_SSL: false
           DURABLE: false
+
+          
