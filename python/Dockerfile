@@ -1,4 +1,4 @@
-ARG BASE=zhihang161013/openeuler:24.03-lts
+ARG BASE=zhihang161013/openeuler:25.03
 ARG VERSION=3.11.1
 
 FROM openeuler/openeuler:24.03-lts as builder
@@ -56,11 +56,9 @@ RUN VERSION_SHORT=$(echo "${VERSION}" | cut -d. -f1,2) && \
     VERSION_MAJOR=$(echo "${VERSION}" | cut -d. -f1,2,3) && \
     PY_HOME=/usr/local/python${VERSION_SHORT} && \
     mv /usr/local/python ${PY_HOME} && \
-    ln -sf ${PY_HOME}/bin/python${VERSION_SHORT} /usr/bin/python${VERSION_SHORT} && \
-    ln -sf ${PY_HOME}/bin/pip${VERSION_SHORT} /usr/bin/pip${VERSION_SHORT} && \
-    ln -sf /usr/bin/python${VERSION_SHORT} /usr/bin/python${VERSION_MAJOR} && \
-    ln -sf /usr/bin/pip${VERSION_SHORT} /usr/bin/pip${VERSION_MAJOR} && \
-    ln -sf /usr/bin/python${VERSION_MAJOR} /usr/bin/python && \
-    ln -sf /usr/bin/pip${VERSION_MAJOR} /usr/bin/pip && \
-    echo "export PATH=${PY_HOME}:${PATH}" >> /etc/profile && \
-    echo "export PATH=${PY_HOME}:${PATH}" >> ~/.bashrc
+    ln -sf ${PY_HOME}/bin/python${VERSION_SHORT} ${PY_HOME}/bin/python${VERSION_MAJOR} && \
+    ln -sf ${PY_HOME}/bin/pip${VERSION_SHORT} ${PY_HOME}/bin/pip${VERSION_MAJOR} && \
+    ln -sf ${PY_HOME}/bin/python${VERSION_MAJOR} ${PY_HOME}/bin/python && \
+    ln -sf ${PY_HOME}/bin/pip${VERSION_MAJOR} ${PY_HOME}/bin/pip && \
+    echo "export PATH=${PY_HOME}/bin:${PATH}" >> /etc/profile && \
+    echo "export PATH=${PY_HOME}/bin:${PATH}" >> ~/.bashrc
