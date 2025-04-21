@@ -125,8 +125,8 @@ jobs:
               "artifact": {
                 "type": "container",
                 "info": {
-                  "archs": "["x86_64", "aarch64"],
-                  "registries": "["docker.io", "quay.io"]",
+                  "archs": ["x86_64", "aarch64"],
+                  "registries": ["docker.io", "quay.io"],
                   "repository": "zhihang161013",
                   "name": "openeuler",
                   "version": "25.03",
