@@ -1,8 +1,8 @@
-ARG BASE=zhihang161013/cann:8.0.0.alpha001-python3.9.1-oe2503
+ARG BASE=zhihang161013/python:3.9.1-oe2503
 
 FROM ${BASE}
 
-ARG VERSION=2.4.1
+ARG VERSION=2.5.0
 
 RUN yum install -y python3-pip
 
