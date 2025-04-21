@@ -2,7 +2,7 @@
 name: EulerPublisher 🚀
 on: [push]
 jobs:
-  build-openeuler:
+  build-python:
     strategy:
       matrix:
         include:
@@ -48,12 +48,12 @@ jobs:
           platforms: ${{ matrix.arch }}
           tags: |
             
-            docker.io/zhihang161013/openeuler
+            docker.io/zhihang161013/python
             
-            quay.io/zhihang161013/openeuler
+            quay.io/zhihang161013/python
             
-          file: ${{ github.workspace }}/openeuler/Dockerfile
-          context: ${{ github.workspace }}/openeuler
+          file: ${{ github.workspace }}/python/Dockerfile
+          context: ${{ github.workspace }}/python
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
@@ -65,21 +65,21 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-openeuler-${{ matrix.arch }}
+          name: digests-python-${{ matrix.arch }}
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
 
-  push-openeuler:
+  push-python:
     runs-on: ubuntu-24.04
     needs:
-      - build-openeuler
+      - build-python
     steps:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
           path: ${{ runner.temp }}/digests
-          pattern: digests-openeuler-*
+          pattern: digests-python-*
           merge-multiple: true
 
       
@@ -105,11 +105,11 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/openeuler:25.03 \
-            $(printf 'zhihang161013/openeuler@sha256:%s ' *)
+          docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2503 \
+            $(printf 'zhihang161013/python@sha256:%s ' *)
           
-          docker buildx imagetools create -t quay.io/zhihang161013/openeuler:25.03 \
-            $(printf 'zhihang161013/openeuler@sha256:%s ' *)
+          docker buildx imagetools create -t quay.io/zhihang161013/python:3.9.1-oe2503 \
+            $(printf 'zhihang161013/python@sha256:%s ' *)
           
           echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
 
@@ -128,9 +128,9 @@ jobs:
                   "archs": ["x86_64", "aarch64"],
                   "registries": ["docker.io", "quay.io"],
                   "repository": "zhihang161013",
-                  "name": "openeuler",
-                  "version": "25.03",
-                  "tag": "25.03",
+                  "name": "python",
+                  "version": "3.9.1",
+                  "tag": "3.9.1-oe2503",
                   "status": "${{ job.status }}"
                 }
               }
