@@ -1,5 +1,5 @@
-ARG BASE=zhihang161013/openeuler:25.03
-ARG VERSION=3.10.1
+ARG BASE=zhihang161013/openeuler:24.03-lts
+ARG VERSION=3.9.1
 
 FROM openeuler/openeuler:24.03-lts as builder
 
