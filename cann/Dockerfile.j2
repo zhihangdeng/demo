@@ -120,7 +120,7 @@ RUN yum update -y && \
     && rm -rf /var/cache/yum \
     && rm -rf /tmp/*
 
-COPY --from=builder/usr/local/Ascend /usr/local/Ascend
+COPY --from=builder /usr/local/Ascend /usr/local/Ascend
 COPY --from=builder /etc/Ascend /etc/Ascend
 
 # Note: Set environment variables
