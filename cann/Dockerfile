@@ -1,6 +1,6 @@
 # Arguments
 ARG PY_VERSION=3.10
-ARG BASE=zhihang161013/python:3.10.1-oe2403lts
+ARG BASE=zhihang161013/python:3.11.1-oe2203lts
 ARG CANN_VERSION=8.0.0.alpha001
 
 # Stage 1: Install CANN
