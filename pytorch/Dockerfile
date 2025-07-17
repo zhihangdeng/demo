@@ -1,6 +1,6 @@
-ARG BASE=zhihang161013/python:3.10.1-oe2403sp1
+ARG BASE=zhihang161013/python:3.9.1-oe2203sp1
 
-ARG VERSION=2.5.0
+ARG VERSION=2.4.1
 
 FROM ${BASE}
 

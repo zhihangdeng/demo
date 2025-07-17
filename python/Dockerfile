@@ -1,5 +1,5 @@
-ARG BASE=zhihang161013/openeuler:25.03
-ARG VERSION=3.11.1
+ARG BASE=zhihang161013/openeuler:22.03-lts-sp1
+ARG VERSION=3.9.1
 
 FROM ${BASE} as builder
 
