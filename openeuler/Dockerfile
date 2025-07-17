@@ -1,11 +1,13 @@
 ARG BASE=scratch
 
-ARG VERSION=24.03.LTS.SP1
+ARG VERSION=25.03
 
 FROM openeuler/openeuler:24.03-lts as builder
 
 ARG VERSION
 ARG TARGETARCH
+
+ARG VERSION=25.03
 
 RUN yum install -y wget xz tar
 

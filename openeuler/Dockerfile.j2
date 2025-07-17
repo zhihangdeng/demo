@@ -7,6 +7,8 @@ FROM openeuler/openeuler:24.03-lts as builder
 ARG VERSION
 ARG TARGETARCH
 
+ARG VERSION={{ version }}
+
 RUN yum install -y wget xz tar
 
 RUN ARCH=$(case "${TARGETARCH}" in \
