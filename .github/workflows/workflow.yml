@@ -89,7 +89,7 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/openeuler:24.03-lts \
+          docker buildx imagetools create -t docker.io/zhihang161013/openeuler:25.03 \
             $(printf 'zhihang161013/openeuler@sha256:%s ' *)
           
           echo "timestamp=$(date -u +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
@@ -110,8 +110,8 @@ jobs:
       #             "registries": ["docker.io"],
       #             "repository": "zhihang161013",
       #             "name": "openeuler",
-      #             "version": "24.03.LTS",
-      #             "tag": "24.03-lts",
+      #             "version": "25.03",
+      #             "tag": "25.03",
       #             "status": "${{ job.status }}"
       #           }
       #         }
@@ -215,7 +215,7 @@ jobs:
         working-directory: ${{ runner.temp }}/digests
         run: |
           
-          docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2403lts \
+          docker buildx imagetools create -t docker.io/zhihang161013/python:3.9.1-oe2503 \
             $(printf 'zhihang161013/python@sha256:%s ' *)
           
           echo "timestamp=$(date -u +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
@@ -237,7 +237,7 @@ jobs:
       #             "repository": "zhihang161013",
       #             "name": "python",
       #             "version": "3.9.1",
-      #             "tag": "3.9.1-oe2403lts",
+      #             "tag": "3.9.1-oe2503",
       #             "status": "${{ job.status }}"
       #           }
       #         }
